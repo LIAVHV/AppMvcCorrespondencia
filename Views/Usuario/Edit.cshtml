@@ -1,0 +1,54 @@
+@model UsuarioEditViewModel
+
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<h1>Editar</h1>
+<h4>Usuarios</h4>
+<hr />
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdUsuario" />
+            <div class="form-floating mb-3">
+                <input asp-for="Nombre" class="form-control" placeholder="Nombre" />
+                <label asp-for="Nombre" class="control-label"></label>
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Username" class="form-control" placeholder="Username" />
+                <label asp-for="Username" class="control-label"></label>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Password" class="form-control" type="password" placeholder="Nueva contraseña" />
+                <label asp-for="Password" class="control-label"></label>
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <p class="small text-muted mt-1">Ingrese una nueva contraseña solo si desea reemplazar la actual.</p>
+            </div>
+            <div class="form-floating mb-3">
+                <select asp-for="Rol" class="form-select">
+                    <option value="usuario">usuario</option>
+                    <option value="admin">admin</option>
+                </select>
+                <label asp-for="Rol" class="control-label"></label>
+                <span asp-validation-for="Rol" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Departamento" class="form-control" placeholder="Departamento" />
+                <label asp-for="Departamento" class="control-label"></label>
+                <span asp-validation-for="Departamento" class="text-danger"></span>
+            </div>
+            <div class="mb-3 mt-3">
+                <input type="submit" value="Modificar" class="btn btn-outline-primary" />
+                <a asp-action="Index" class="btn btn-outline-secondary">Regresar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,30 @@
+@model CrearDocumentoViewModel
+
+@{
+    ViewData["Title"] = "Crear Documento";
+}
+
+<h2>📄 Crear Documento</h2>
+<p class="alert alert-info">Al terminar de crear su documento se redirigirá automáticamente a "Enviar".</p>
+
+<form asp-action="Crear" method="post" class="col-md-6">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-floating mb-3">
+        <input asp-for="Nombre" class="form-control" placeholder="Nombre del documento, no oficio, solicitud" />
+        <label asp-for="Nombre"></label>
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="form-floating mb-3">
+        <textarea asp-for="Detalle" class="form-control" style="height: 100px" placeholder="Detalle"></textarea>
+        <label asp-for="Detalle"></label>
+        <span asp-validation-for="Detalle" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary">Crear</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

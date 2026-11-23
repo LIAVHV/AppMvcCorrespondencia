@@ -1,0 +1,40 @@
+@model EnviarDocumentoViewModel
+
+@{
+    ViewData["Title"] = "Enviar Documento";
+}
+
+<h2>📨 Enviar Documento</h2>
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Mensaje
+    </div>
+}
+
+<form asp-action="Enviar" method="post" class="col-md-6">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-floating mb-3">
+        <select asp-for="UsuarioDestino" asp-items="Model.Destinatarios" class="form-select">
+            <option value="0">-- Seleccione un destinatario --</option>
+        </select>
+        <label asp-for="UsuarioDestino" class="form-label"></label>
+        <span asp-validation-for="UsuarioDestino" class="text-danger"></span>
+    </div>
+
+    <div class="form-floating mb-3">
+        <select asp-for="IdDocumento" asp-items="Model.Documentos" class="form-select">
+            <option value="">-- Seleccione un documento --</option>
+        </select>
+        <label asp-for="IdDocumento" class="form-label"></label>
+        <span asp-validation-for="IdDocumento" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary">Enviar</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

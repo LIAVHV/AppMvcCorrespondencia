@@ -1,0 +1,52 @@
+@model UsuarioCreateViewModel
+
+@{
+    ViewData["Title"] = "Crear Usuario";
+}
+
+<h1>Crear</h1>
+<h4>Usuarios</h4>
+<hr />
+<div class="row">
+    <div class="col-md-5">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Nombre" class="form-control" placeholder="Nombre" />
+                <label asp-for="Nombre" class="control-label"></label>
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Username" class="form-control" placeholder="Username" />
+                <label asp-for="Username" class="control-label"></label>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Password" type="password" class="form-control" placeholder="Contraseña" />
+                <label asp-for="Password" class="control-label"></label>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <select asp-for="Rol" class="form-select">
+                    <option value="usuario">usuario</option>
+                    <option value="admin">admin</option>
+                </select>
+                <label asp-for="Rol" class="control-label"></label>
+                <span asp-validation-for="Rol" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Departamento" class="form-control" placeholder="Departamento" />
+                <label asp-for="Departamento" class="control-label"></label>
+                <span asp-validation-for="Departamento" class="text-danger"></span>
+            </div>
+            <div class="mb-3 mt-3">
+                <input type="submit" value="Crear" class="btn btn-outline-primary" />
+                <a asp-action="Index" class="btn btn-outline-secondary">Regresar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,91 @@
+@model RecibirDocumentoViewModel
+
+@{
+    ViewData["Title"] = "Recepción y Avance";
+}
+
+<h2>📩 Recepción y Avance del Documento</h2>
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Mensaje
+    </div>
+}
+
+<form asp-action="Recibir" method="post" class="col-md-6 mt-4">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-floating mb-3">
+        <select asp-for="IdDocumento" asp-items="Model.Documentos" class="form-select">
+            <option value="">-- Seleccione un documento --</option>
+        </select>
+        <label asp-for="IdDocumento" class="form-label"></label>
+        <span asp-validation-for="IdDocumento" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <p class="mb-1 fw-semibold">Seleccione Avance</p>
+        <p class="small text-muted">Al seleccionar el 100%, el estado del documento cambia en automático a concluido.</p>
+        <div class="form-check form-check-inline">
+            <input asp-for="Avance" id="avance25" class="form-check-input" type="radio" value="25" />
+            <label for="avance25" class="form-check-label">25%</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input asp-for="Avance" id="avance50" class="form-check-input" type="radio" value="50" />
+            <label for="avance50" class="form-check-label">50%</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input asp-for="Avance" id="avance75" class="form-check-input" type="radio" value="75" />
+            <label for="avance75" class="form-check-label">75%</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input asp-for="Avance" id="avance100" class="form-check-input" type="radio" value="100" />
+            <label for="avance100" class="form-check-label">100%</label>
+        </div>
+        <div>
+            <span asp-validation-for="Avance" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-floating mb-3">
+        <select asp-for="EstadoDocumento" class="form-select">
+            <option value="en proceso">en proceso</option>
+            <option value="concluido">concluido</option>
+        </select>
+        <label asp-for="EstadoDocumento" class="form-label"></label>
+        <span asp-validation-for="EstadoDocumento" class="text-danger"></span>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input type="text" asp-for="Observaciones" class="form-control" placeholder="Observaciones" />
+        <label asp-for="Observaciones" class="form-label"></label>
+        <span asp-validation-for="Observaciones" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary">Recibir</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const radios = document.querySelectorAll('input[name="Avance"]');
+            const estado = document.querySelector('select[name="EstadoDocumento"]');
+            const observaciones = document.querySelector('input[name="Observaciones"]');
+            const nombreUsuario = "@Html.Raw(JavaScriptEncoder.Default.Encode(User.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value ?? string.Empty))";
+
+            radios.forEach(radio => {
+                radio.addEventListener("change", function () {
+                    if (this.value !== "100") {
+                        observaciones.value = `Documento en proceso por ${nombreUsuario}`;
+                        estado.value = "en proceso";
+                    } else {
+                        observaciones.value = `Concluido por ${nombreUsuario}`;
+                        estado.value = "concluido";
+                    }
+                });
+            });
+        });
+    </script>
+}

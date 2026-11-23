@@ -1,0 +1,35 @@
+@model LoginViewModel
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+<div class="row justify-content-center align-items-center mt-4">
+    <div class="col-md-5 mb-4">
+        <h3 class="text-primary">
+            <i class="bi bi-inbox-fill"></i>
+            Gestión de Correspondencia Interna
+        </h3>
+        <form asp-controller="Account" asp-action="Login" method="post">
+            <div class="form-floating mt-3 mb-3">
+                <input asp-for="Username" class="form-control" placeholder="Usuario" />
+                <label asp-for="Username" class="form-label">Usuario</label>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Password" type="password" class="form-control" placeholder="Contraseña" />
+                <label asp-for="Password" class="form-label">Contraseña</label>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mt-3"></div>
+        </form>
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

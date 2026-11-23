@@ -1,0 +1,38 @@
+@model Usuarios
+
+@{
+    ViewData["Title"] = "Eliminar Usuario";
+}
+
+<h3>¿Está seguro de borrar este registro?</h3>
+<div>
+    @if (ViewBag.Mensaje != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Mensaje
+        </div>
+    }
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Nombre)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Nombre)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Username)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Username)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Rol)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Rol)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Departamento)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.Departamento)</dd>
+
+        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.FechaCreacion)</dt>
+        <dd class="col-sm-9">@Html.DisplayFor(model => model.FechaCreacion)</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="IdUsuario" />
+        <input type="submit" value="Eliminar" class="btn btn-outline-danger" />
+        <a asp-action="Index" class="btn btn-outline-secondary">Regresar</a>
+    </form>
+</div>
